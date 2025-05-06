@@ -1,0 +1,8 @@
+.id-input input{
+    padding: 6px 2px;
+    border: 2px solid #000;
+    border-radius: 4px;
+    background-color: rgb(236, 168, 20);
+    margin: 0% 25%;
+    width: 50%;
+}

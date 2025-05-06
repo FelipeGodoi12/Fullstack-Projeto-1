@@ -1,0 +1,18 @@
+label {
+    margin: 25%;
+    font-weight: bold;
+}
+
+button {
+    margin: 0% 50%;
+    background-color: red;
+    border: 2px solid #000;
+    border-radius: 2px;
+    color: orange;
+    padding: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: rgb(238, 56, 56);
+}
