@@ -1,0 +1,13 @@
+import styled from "styled-components"
+
+export const Div = styled.div`
+  input {
+    padding: 6px 2px;
+    border: 2px solid #000;
+    border-radius: 4px;
+    background-color: rgb(236, 168, 20);
+    margin: 0.7% 25%;
+    width: 50%;
+  }
+`
+

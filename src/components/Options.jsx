@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import './Options.css'
+import { Button, Label, OpInput } from "./OptStyled"
 
 export default function Options ({id}) {
 
@@ -33,56 +33,56 @@ export default function Options ({id}) {
     return ( 
       <>
         <div className="checkbox-options" id="box">
-          <label>
-            <input type="radio" name="opt" id="character-box" className="op" onChange={() => setCollection('characters')}
+          <Label>
+            <OpInput type="radio" name="opt" id="character-box" className="op" onChange={() => setCollection('characters')}
             />Personagem
             <br />
-          </label>
+          </Label>
 
-          <label>
-            <input type="radio" name="opt" id="akatsuki-box" className="op"  onChange={() => setCollection('akatsuki')}
+          <Label>
+            <OpInput type="radio" name="opt" id="akatsuki-box" className="op"  onChange={() => setCollection('akatsuki')}
             />Akatsuki
             <br />
-          </label>
+          </Label>
 
-          <label>
-            <input type="radio" name="opt" id="villages-box" className="op"  onChange={() => setCollection('villages')} 
+          <Label>
+            <OpInput type="radio" name="opt" id="villages-box" className="op"  onChange={() => setCollection('villages')} 
             />Vilas
             <br />
-          </label>
+          </Label>
 
-          <label>
-            <input type="radio" name="opt" id="clans-box" className="op"  onChange={() => setCollection('clans')}
+          <Label>
+            <OpInput type="radio" name="opt" id="clans-box" className="op"  onChange={() => setCollection('clans')}
             />Clãs
             <br />
-          </label>
+          </Label>
 
-          <label>
-            <input type="radio" name="opt" id="kekkei-genkai-box" className="op"  onChange={() => setCollection('kekkei-genkai')}
+          <Label>
+            <OpInput type="radio" name="opt" id="kekkei-genkai-box" className="op"  onChange={() => setCollection('kekkei-genkai')}
             />Kekkei-genkai
             <br />
-          </label>
+          </Label>
 
-          <label>
-            <input type="radio" name="opt" id="tailed-beasts-box" className="op" onChange={() => setCollection('tailed-beasts')}
+          <Label>
+            <OpInput type="radio" name="opt" id="tailed-beasts-box" className="op" onChange={() => setCollection('tailed-beasts')}
             />Bestas de Cauda
             <br />
-          </label>
+          </Label>
 
-          <label>
-            <input type="radio" name="opt" id="teams-box" className="op" onChange={() => setCollection('teams')}
+          <Label>
+            <OpInput type="radio" name="opt" id="teams-box" className="op" onChange={() => setCollection('teams')}
             />Equipes
             <br />
-          </label>
+          </Label>
 
-          <label>
-          <input type="radio" name="opt" id="kara-box" classN="op" onChange={() => setCollection('kara')}
+          <Label>
+          <OpInput type="radio" name="opt" id="kara-box" classN="op" onChange={() => setCollection('kara')}
           />Kara
           <br />
-          </label>
+          </Label>
         </div>
-          
-        <button onClick={handleFetch}>Pesquisar</button>
+        
+        <Button onClick={handleFetch}>Pesquisar</Button>
 
         {erro && <p style={{ color: "red", textAlign: "center", margin: "60px 10px"}}>{erro}</p>}
 

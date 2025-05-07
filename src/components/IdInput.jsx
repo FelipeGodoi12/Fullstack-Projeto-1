@@ -1,7 +1,7 @@
 import { useState } from "react"
 import Options from './Options'
+import { Div } from "./IdInputStyled.jsx"
 
-import './IdInput.css'
 
 export default function IdInput () {
 
@@ -9,14 +9,14 @@ export default function IdInput () {
 
     return (
         <>
-            <div className="id-input">
+            <Div className="id-input">
                 <input 
                     type="text" 
                     onChange={(e) => setId(e.target.value)}
                     value={id}
                     placeholder='Entre com o ID...'
                 />
-            </div>
+            </Div>
             <Options id={id}/>
         </>
     )
