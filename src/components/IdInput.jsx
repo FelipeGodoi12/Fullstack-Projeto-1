@@ -1,10 +1,33 @@
-import { useState } from "react"
+import { useReducer } from "react"
 import Options from './Options'
 import { Div, Titulo } from "./IdInputStyled.jsx"
 
+const initialArgs = {
+    id: ''
+}
+
+function reducer(state, action) {
+    switch(action.type) {
+        case 'INPUT': {
+            return {
+                id: action.idInput
+            }
+        }
+        default:
+            return state;
+    }
+}
+
 export default function IdInput () {
 
-    const [id, setId] = useState(null)
+    const [state, dispatch] = useReducer(reducer, initialArgs);
+
+    function handleInput (e) {
+        dispatch({
+            type: 'INPUT',
+            idInput: e.target.value
+        })
+    }
 
     return (
         <>
@@ -12,15 +35,15 @@ export default function IdInput () {
             <h1>NARUTO API</h1>
             <h3>Digite o ID e escolha uma das coleções abaixo:</h3>
         </Titulo>
-            <Div className="id-input">
+            <Div>
                 <input 
                     type="text" 
-                    onChange={(e) => setId(e.target.value)}
-                    value={id}
+                    value={state.id}
+                    onChange={handleInput}
                     placeholder='Entre com o ID...'
                 />
             </Div>
-            <Options id={id}/>
+            <Options id={state.id}/>
         </>
     )
 }

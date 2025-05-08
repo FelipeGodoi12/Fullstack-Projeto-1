@@ -19,11 +19,6 @@ export const Button = styled.button`
     color: rgb(241, 166, 27);
     padding: 5px;
     cursor: pointer;
-
-    :hover {
-        background-color: rgb(238, 56, 56);
-    }
-
 `
 export const Label = styled.label`
     margin: 25%;
