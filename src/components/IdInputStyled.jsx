@@ -6,7 +6,7 @@ export const Div = styled.div`
     border: 2px solid #000;
     border-radius: 4px;
     background-color: rgb(236, 168, 20);
-    margin: 10px 25%;
+    margin: 10px 42%;
   }
 `
 

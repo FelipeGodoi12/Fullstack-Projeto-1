@@ -12,17 +12,17 @@ export const Resultado = styled.div`
 
 export const Button = styled.button`
     font-weight: bold;
-    margin: 0% 50%;
+    margin: 0% 45%;
     background-color: rgb(194, 2, 18);
     border: 3px solid #000;
-    border-radius: 2px;
+    border-radius: 5px;
     color: rgb(241, 166, 27);
-    padding: 5px;
+    padding: 10px 20px;
     cursor: pointer;
 `
 export const Label = styled.label`
-    margin: 25%;
     font-weight: bold;
+    margin-left: 30px;
 `
 
 export const OpInput = styled.input`
@@ -36,3 +36,10 @@ export const Erro = styled.p`
     margin: 10px 35%;
     background-color: #f8d0d0;
 `;
+
+export const OptionsDiv = styled.div`
+    background-image: url('pergaminho.jpg');
+    background-repeat: no-repeat;
+    padding: 60px 5px;
+    margin: 10px 40%;
+`

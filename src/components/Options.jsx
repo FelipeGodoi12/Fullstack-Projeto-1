@@ -1,5 +1,5 @@
 import { useReducer } from 'react'
-import { Button, Erro, Label, OpInput, Resultado } from "./OptStyled.jsx"
+import { Button, Erro, Label, OpInput, Resultado, OptionsDiv } from "./OptStyled.jsx"
 
 function reducer(state, action) {
     switch(action.type) {
@@ -57,7 +57,7 @@ export default function Options ({id}) {
 
     return ( 
       <>
-        <div className="checkbox-options" id="box">
+        <OptionsDiv className="checkbox-options" id="box">
           <Label>
             <OpInput type="radio" name="opt" id="character-box" className="op" onChange={() => dispatch({ type: 'collection', collection: 'characters' })}
             />Personagem
@@ -105,7 +105,7 @@ export default function Options ({id}) {
           />Kara
           <br />
           </Label>
-        </div>
+        </OptionsDiv>
         
         <Button onClick={handleFetch}>Pesquisar</Button>
 
