@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button, Label, OpInput } from "./OptStyled"
+import { Button, Erro, Label, OpInput, Resultado } from "./OptStyled.jsx"
 
 export default function Options ({id}) {
 
@@ -12,15 +12,15 @@ export default function Options ({id}) {
       (async () => { 
         
         if (!collection) {
-          setErro("Selecione uma opção antes de pesquisar.");
+          setErro("Selecione uma coleção antes de pesquisar.");
           setResult(null);
           return;
         }
 
         const resp = await fetch(`https://dattebayo-api.onrender.com/${collection}/${id}`)
-
+        
         if(!resp.ok) {
-          setErro("ERRO! Dado inexistente!")
+          setErro("ERRO! ID inexistente para essa coleção!")
           setResult(null)
         } 
 
@@ -29,7 +29,7 @@ export default function Options ({id}) {
         setErro(null)
       })();
     }
-    
+
     return ( 
       <>
         <div className="checkbox-options" id="box">
@@ -84,13 +84,10 @@ export default function Options ({id}) {
         
         <Button onClick={handleFetch}>Pesquisar</Button>
 
-        {erro && <p style={{ color: "red", textAlign: "center", margin: "60px 10px"}}>{erro}</p>}
+        {erro && <Erro>{erro}</Erro>}
 
         {result && (
-          <div className="resultado" style={{textAlign: "center", 
-                                              margin: "60px 30%", 
-                                              border: "2px solid #000",
-                                              borderRadius: "5px"}}>
+          <Resultado>
             <h1>Nome: {result.name}</h1>
             <br />
 
@@ -117,7 +114,7 @@ export default function Options ({id}) {
                 ))}
               </div>
             )}
-          </div>
+          </Resultado>
         )}
       </>
     )
