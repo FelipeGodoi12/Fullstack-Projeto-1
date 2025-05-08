@@ -33,8 +33,6 @@ export const Erro = styled.p`
     color: red;
     margin: 60px 10px;
     text-align: center;
-    border: solid red 2px;
-    padding: 10px;
-    margin: 5px 35%;
+    margin: 10px 35%;
     background-color: #f8d0d0;
-`
+`;

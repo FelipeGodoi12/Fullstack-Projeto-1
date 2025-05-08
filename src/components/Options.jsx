@@ -1,32 +1,57 @@
-import { useState } from 'react'
+import { useReducer } from 'react'
 import { Button, Erro, Label, OpInput, Resultado } from "./OptStyled.jsx"
 
-export default function Options ({id}) {
-
-    const [collection, setCollection] = useState(null)
-    const [erro, setErro] = useState(null)
-    const [result, setResult] = useState(null)
-    
-    
-    const handleFetch = () => {
-      (async () => { 
-        
-        if (!collection) {
-          setErro("Selecione uma coleção antes de pesquisar.");
-          setResult(null);
-          return;
+function reducer(state, action) {
+    switch(action.type) {
+        case 'collection': {
+            return {
+                ...state,
+                collection: action.collection,
+                erro: null
+            }
         }
 
-        const resp = await fetch(`https://dattebayo-api.onrender.com/${collection}/${id}`)
+        case 'result': {
+            return {
+                ...state,
+                result: action.result,
+                erro: null
+            }
+        }
+
+        case 'erro': {
+            return {
+                erro: action.erro,
+                result: null
+            }
+        }
+        default: state
+    }
+}
+
+export default function Options ({id}) {
+    
+    const [state, dispatch] = useReducer(reducer, { collection: null, erro: null, result: null})
+
+    const handleFetch = () => {
+      (async () => { 
+          
+        if (!state.collection) {
+           return dispatch({type: 'erro', erro: "Selecione uma coleção antes de pesquisar."})
+        }
         
+        const resp = await fetch(`https://dattebayo-api.onrender.com/${state.collection}/${id}`)
+
+        if(!id) {
+            return dispatch({type: 'erro', erro: "Insira um ID para pesquisa"})
+        }
+
         if(!resp.ok) {
-          setErro("ERRO! ID inexistente para essa coleção!")
-          setResult(null)
+            return dispatch({type: 'erro', erro: "ERRO! ID inexistente para essa coleção!"})
         } 
 
         const data = await resp.json();
-        setResult(data)
-        setErro(null)
+        dispatch({type: 'result', result: data})
       })();
     }
 
@@ -34,49 +59,49 @@ export default function Options ({id}) {
       <>
         <div className="checkbox-options" id="box">
           <Label>
-            <OpInput type="radio" name="opt" id="character-box" className="op" onChange={() => setCollection('characters')}
+            <OpInput type="radio" name="opt" id="character-box" className="op" onChange={() => dispatch({ type: 'collection', collection: 'characters' })}
             />Personagem
             <br />
           </Label>
 
           <Label>
-            <OpInput type="radio" name="opt" id="akatsuki-box" className="op"  onChange={() => setCollection('akatsuki')}
+            <OpInput type="radio" name="opt" id="akatsuki-box" className="op"  onChange={() => dispatch({ type: 'collection', collection: 'akatsuki' })}
             />Akatsuki
             <br />
           </Label>
 
           <Label>
-            <OpInput type="radio" name="opt" id="villages-box" className="op"  onChange={() => setCollection('villages')} 
+            <OpInput type="radio" name="opt" id="villages-box" className="op"  onChange={() => dispatch({ type: 'collection', collection: 'villages' })} 
             />Vilas
             <br />
           </Label>
 
           <Label>
-            <OpInput type="radio" name="opt" id="clans-box" className="op"  onChange={() => setCollection('clans')}
+            <OpInput type="radio" name="opt" id="clans-box" className="op"  onChange={() => dispatch({ type: 'collection', collection: 'clans' })}
             />Clãs
             <br />
           </Label>
 
           <Label>
-            <OpInput type="radio" name="opt" id="kekkei-genkai-box" className="op"  onChange={() => setCollection('kekkei-genkai')}
+            <OpInput type="radio" name="opt" id="kekkei-genkai-box" className="op"  onChange={() => dispatch({ type: 'collection', collection: 'kekkei-genkai' })}
             />Kekkei-genkai
             <br />
           </Label>
 
           <Label>
-            <OpInput type="radio" name="opt" id="tailed-beasts-box" className="op" onChange={() => setCollection('tailed-beasts')}
+            <OpInput type="radio" name="opt" id="tailed-beasts-box" className="op" onChange={() => dispatch({ type: 'collection', collection: 'tailed-beasts' })}
             />Bestas de Cauda
             <br />
           </Label>
 
           <Label>
-            <OpInput type="radio" name="opt" id="teams-box" className="op" onChange={() => setCollection('teams')}
+            <OpInput type="radio" name="opt" id="teams-box" className="op" onChange={() => dispatch({ type: 'collection', collection: 'teams' })}
             />Equipes
             <br />
           </Label>
 
           <Label>
-          <OpInput type="radio" name="opt" id="kara-box" classN="op" onChange={() => setCollection('kara')}
+          <OpInput type="radio" name="opt" id="kara-box" classN="op" onChange={() => dispatch({ type: 'collection', collection: 'kara' })}
           />Kara
           <br />
           </Label>
@@ -84,38 +109,36 @@ export default function Options ({id}) {
         
         <Button onClick={handleFetch}>Pesquisar</Button>
 
-        {erro && <Erro>{erro}</Erro>}
+        {state.result ? 
+             <Resultado>
+             <h1>Nome: {state.result.name}</h1>
+             <br />
 
-        {result && (
-          <Resultado>
-            <h1>Nome: {result.name}</h1>
-            <br />
+             {state.result.jutsu && (
+             <div className="jutsus">
+                 <h2>Jutsus: </h2>
+                 <ul style={{listStyleType: "none"}}>
+                     {state.result.jutsu.map((jutsus, index) => (
+                     <li key={index}>{jutsus}</li>
+                     ))}
+                 </ul>
+             </div>
+             )}
 
-            {result.jutsu && (
-              <div className="jutsus">
-                <h2>Jutsus: </h2>
-                  <ul style={{listStyleType: "none"}}>
-                    {result.jutsu.map((jutsus, index) => (
-                      <li key={index}>{jutsus}</li>
-                    ))}
-                  </ul>
-              </div>
-            )}
+             {state.result.images && (
+             <img src={state.result.images[0]} alt={state.result.name} style={{width: "30%"}}/>
+             )}
 
-            {result.images && (
-              <img src={result.images[0]} alt={result.name} style={{width: "30%"}}/>
-            )}
-
-            {result.characters && (
-              <div className="personages-equipe">
-                <h3>Personagens:</h3>
-                {result.characters.map((per, index) => (
-                  <p key={index}>{per}</p>
-                ))}
-              </div>
-            )}
-          </Resultado>
-        )}
+             {state.result.characters && (
+             <div className="personages-equipe">
+                 <h3>Personagens:</h3>
+                 {state.result.characters.map((per, index) => (
+                 <p key={index}>{per}</p>
+                 ))}
+             </div>
+             )}
+       </Resultado>
+        : <Erro>{state.erro}</Erro> }
       </>
     )
 }

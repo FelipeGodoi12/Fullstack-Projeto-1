@@ -13,11 +13,10 @@ export const Div = styled.div`
 export const Titulo = styled.div`
     text-align: center;
   h1 {
+    font-family: 'Shadows Into Light', cursive;
     font-size: 10em;
-    background-image: linear-gradient(to bottom, orangered, orange);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: orangered;
+    text-shadow: 2px 2px 5px black;
   }
 
   h3 {
@@ -25,5 +24,11 @@ export const Titulo = styled.div`
     background-color: #e4c953;
     margin: 0 35%;
     border-radius: 2px;
+  }
+
+  @media (max-width: 678px) {
+    h1 {
+      font-size: 6em;
+    }
   }
 `
