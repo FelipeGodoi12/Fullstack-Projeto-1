@@ -12,7 +12,7 @@ export const Resultado = styled.div`
 
 export const Button = styled.button`
     font-weight: bold;
-    margin: 0% 45%;
+    margin: 0% 47.1%;
     background-color: rgb(194, 2, 18);
     border: 3px solid #000;
     border-radius: 5px;
@@ -27,7 +27,7 @@ export const Label = styled.label`
 `
 
 export const OpInput = styled.input`
-  margin-bottom: 0.44%;
+  margin-bottom: 0.50%;
 `;
 
 export const Erro = styled.p`
@@ -43,5 +43,9 @@ export const OptionsDiv = styled.div`
     background-size: cover;
     background-repeat: no-repeat;
     padding: 60px 5px;
-    margin: 10px 40%;
+    margin: 10px 42%;
 `
+
+export const ListItem = styled.li`
+  list-style-type: none;
+`;
