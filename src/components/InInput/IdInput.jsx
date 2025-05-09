@@ -1,5 +1,5 @@
 import { useReducer } from "react"
-import Options from './Options'
+import Options from '../Options/Options.jsx'
 import { Div, Titulo } from "./IdInputStyled.jsx"
 
 const initialArgs = {
@@ -35,15 +35,15 @@ export default function IdInput () {
             <h1>NARUTO API</h1>
             <h3>Digite o ID e escolha uma das coleções abaixo:</h3>
         </Titulo>
-            <Div>
-                <input 
-                    type="text" 
-                    value={state.id}
-                    onChange={handleInput}
-                    placeholder='Entre com o ID...'
-                />
-            </Div>
-            <Options id={state.id}/>
+                    <Div>
+                        <input 
+                            type="text" 
+                            value={state.id}
+                            onChange={handleInput}
+                            placeholder='Entre com o ID...'
+                            />
+                    </Div>
+                <Options id={state.id}/>
         </>
     )
 }

@@ -1,5 +1,5 @@
 import { useReducer } from 'react'
-import { Button, Erro, Label, OpInput, Resultado, OptionsDiv } from "./OptStyled.jsx"
+import { Button, Erro, Label, OpInput, Resultado, OptionsDiv } from "../Options/OptStyled.jsx"
 
 function reducer(state, action) {
     switch(action.type) {
@@ -22,7 +22,6 @@ function reducer(state, action) {
         case 'erro': {
             return {
                 erro: action.erro,
-                result: null
             }
         }
         default: state
@@ -39,19 +38,23 @@ export default function Options ({id}) {
         if (!state.collection) {
            return dispatch({type: 'erro', erro: "Selecione uma coleção antes de pesquisar."})
         }
-        
-        const resp = await fetch(`https://dattebayo-api.onrender.com/${state.collection}/${id}`)
-
-        if(!id) {
-            return dispatch({type: 'erro', erro: "Insira um ID para pesquisa"})
+        try {
+            const resp = await fetch(`https://dattebayo-api.onrender.com/${state.collection}/${id}`)
+            
+            if(!id) {
+                return dispatch({type: 'erro', erro: "Insira um ID para pesquisa"})
+            }
+    
+            if(!resp.ok) {
+                return dispatch({type: 'erro', erro: "ERRO! ID inexistente para essa coleção!"})
+            } 
+    
+            const data = await resp.json();
+            dispatch({type: 'result', result: data})
+        } catch (error) {
+            console.error(`Erro ao buscar dados da API`, error.message)
         }
 
-        if(!resp.ok) {
-            return dispatch({type: 'erro', erro: "ERRO! ID inexistente para essa coleção!"})
-        } 
-
-        const data = await resp.json();
-        dispatch({type: 'result', result: data})
       })();
     }
 
