@@ -33,7 +33,7 @@ export default function IdInput () {
         <>
         <Titulo>
             <h1>NARUTO API</h1>
-            <h3>Clique em pesquisar para acessar todos os dados ou selecione um ID para pesquisa individual:</h3>
+            <h3>Selecione uma opção e clique em pesquisar para acessar todos os dados ou selecione um ID para pesquisa individual:</h3>
         </Titulo>
                     <Div>
                         <input 
